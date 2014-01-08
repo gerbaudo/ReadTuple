@@ -15,7 +15,7 @@
 
 class Reader : public TSelector
 {
- public:
+public:
     Reader();
     virtual ~Reader();
     virtual void    Init(TTree *tree);
@@ -26,13 +26,15 @@ class Reader : public TSelector
     virtual Int_t   Version() const { return 2; }
     ClassDef(Reader, 2);
 
-  protected:
+protected:
     Int_t m_chainEntry;
     susy::wh::EventParameters* m_eventParameters;
+    susy::wh::FourMom *m_l0, *m_l1, *m_met;
     TBranch* m_eventParameters_b;
-//     susy::wh::TupleMaker m_tupleMaker;
-//     bool m_writeTuple;
-//     std::string m_outTupleFile;
+    TBranch *m_l0_b, *m_l1_b, *m_met_b;
+
+private:
+    void readBranches(Long64_t entry);
 };
 
 #endif // Reader_h
